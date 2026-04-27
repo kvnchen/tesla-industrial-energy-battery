@@ -1,0 +1,80 @@
+Industrial Energy Battery Site
+
+Requirements
+  Qs:
+    What does energy density mean here? Is it energy generated divided by total square footage?
+    Does the transformer count round up (3 batteries, 1 or 2 transformers required)?
+    How many devices can a user add?
+
+  Functional
+    Users can enter the number of each device desired
+    App displays price, land dimension required, and site energy density
+    One transformer for every two industrial batteries bought is automatically added
+    UI auto generates a layout showing an arrangement of selected batteries not exceeding 100ft in width
+    Display images of devices
+
+  Nonfunctional
+    Sessions are saved and can be resumed, persist through cache clears
+    Hosted on a public server
+    UI layout adjusts for desktop/tablet/mobile screen dimensions
+    Unit tests on components
+
+
+Architecture
+  Single page application with Vite, React, Typescript
+  Session data stored in localStorage
+
+
+  localStorage
+    selected_devices: SelectedDevices { [name]: number }
+
+  Components
+
+    DashboardContainer
+      Primary container component
+      Stores selected device state
+      Retrieves and writes session data to/from localStorage
+      Passes data as props to display components
+      Updates device state based on user interactions from the DeviceSelector component
+
+      props:
+        devices: { [name]: Device }
+        transformer: Device
+
+      state:
+        selectedDevices: { [name]: number }
+
+
+    DeviceSelector
+      Renders device specifications (details, image) for available batteries
+      Quantity selector and add button for each battery type, modifies selected device state
+
+    CartSummary
+      Displays current selected quantities of each battery type & transformers
+      Allows toggling battery amount in cart or removing from cart
+      Transformer count derrived and updated based on selected battery count
+      Displays aggregated dimension, cost, and energy density information
+
+    SiteLayout
+      Renders a 2D grid of selected devices + transformers
+
+
+Data Model
+
+  Device
+    name,
+    floorDimension,
+    energy,
+    cost,
+    releaseDate
+
+  SelectedDevices
+    [name]: number
+
+
+API
+
+  localStorage.get('selected_devices') -> SelectedDevices
+  localStorage.set('selected_devices', SelectedDevices)
+
+

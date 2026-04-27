@@ -1,0 +1,1 @@
+export type Battery = 'MegapackXL' | 'Megapack2' | 'Megapack' | 'PowerPack';

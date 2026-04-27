@@ -63,10 +63,10 @@ Data Model
 
   Device
     name,
-    floorDimension,
-    energy,
-    cost,
-    releaseDate
+    floorSqFt,
+    energyMWh,
+    costUSD,
+    releaseYear
 
   SelectedDevices
     [name]: number

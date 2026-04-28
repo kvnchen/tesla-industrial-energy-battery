@@ -6,6 +6,7 @@ import { Battery } from '../../utils/types';
 import i18n from '../../utils/i18n';
 import { useState } from 'react';
 import AccordianCart from '../accordian_cart/accordian_cart';
+import DeviceDetails from '../device_details/device_details';
 
 export default function DeviceSelector({ batteries, selectedDevices, setSelectedDevices }: {
   batteries: Device[],
@@ -18,16 +19,22 @@ export default function DeviceSelector({ batteries, selectedDevices, setSelected
   return (
     <section className={styles['device-selector']}>
       <h1>{i18n('selectDevices')}</h1>
-      {batteries.map((device) =>
-        <AccordianCart
-          key={device.name}
-          deviceName={device.name as Battery}
-          activeId={activeId}
-          setActiveId={setActiveId}
-          quantity={selectedDevices[device.name] ? selectedDevices[device.name] : 0}
-          setSelectedDevices={setSelectedDevices}
-        />
-      )}
+      {batteries.map((device) => {
+        const id = `${device.name}-accordian`;
+
+        return (
+          <div key={device.name}>
+            <AccordianCart
+              deviceName={device.name as Battery}
+              activeId={activeId}
+              setActiveId={setActiveId}
+              quantity={selectedDevices[device.name] ? selectedDevices[device.name] : 0}
+              setSelectedDevices={setSelectedDevices}
+            />
+            {activeId === id && <DeviceDetails device={device} />}
+          </div>
+        );
+      })}
     </section>
   );
 }

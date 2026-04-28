@@ -5,3 +5,7 @@
   background-color: var(--foreground);
   padding: 20px;
 }
+
+.device-selector > h1 {
+  margin-bottom: 20px;
+}

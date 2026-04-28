@@ -1,7 +1,9 @@
 .main {
+  display: flex;
   width: 100vw;
   height: calc(100vh - 56px);
   background-color: var(--background);
   color: var(--text-primary);
   padding: 40px;
+  gap: 20px;
 }

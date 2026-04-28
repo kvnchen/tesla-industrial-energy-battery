@@ -4,6 +4,7 @@ import styles from './dashboard.module.css';
 import { useState, useEffect } from 'react';
 import { Device, SelectedDevices } from '../../utils/interfaces';
 import DeviceSelector from '../device_selector/device_selector';
+import Summary from '../summary/summary';
 
 export default function Dashboard({ batteries, transformer }: {
   batteries: Device[],
@@ -30,6 +31,7 @@ export default function Dashboard({ batteries, transformer }: {
   return (
     <main className={styles.main}>
       <DeviceSelector batteries={batteries} selectedDevices={selectedDevices} setSelectedDevices={setSelectedDevices} />
+      <Summary devices={batteries} transformer={transformer} selectedDevices={selectedDevices} />
     </main>
   );
 }

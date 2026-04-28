@@ -1,11 +1,12 @@
 .device-selector {
-  width: 48vw;
+  width: 46vw;
   height: 90vh;
   border-radius: 15px;
   background-color: var(--foreground);
   padding: 20px;
 }
 
-.device-selector > h1 {
+.device-selector > h2 {
   margin-bottom: 20px;
+  border-bottom: 1px solid lightgray;
 }

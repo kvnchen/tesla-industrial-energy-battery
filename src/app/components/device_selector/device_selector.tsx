@@ -18,7 +18,7 @@ export default function DeviceSelector({ batteries, selectedDevices, setSelected
 
   return (
     <section className={styles['device-selector']}>
-      <h1>{i18n('selectDevices')}</h1>
+      <h2>{i18n('selectDevices')}</h2>
       {batteries.map((device) => {
         const id = `${device.name}-accordian`;
 

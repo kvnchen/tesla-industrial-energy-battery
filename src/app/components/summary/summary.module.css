@@ -1,0 +1,31 @@
+.summary {
+  width: 46vw;
+  height: 45vh;
+  border-radius: 15px;
+  background-color: var(--foreground);
+  padding: 20px;
+}
+
+.summary > h2 {
+  border-bottom: 1px solid lightgray;
+}
+
+.itemized {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.itemized > p {
+  padding-left: 20px;
+}
+
+.device-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bold {
+  font-weight: bold;
+}

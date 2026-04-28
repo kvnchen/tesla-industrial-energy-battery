@@ -8,7 +8,13 @@ const enUS: Dictionary = {
   energy: "Energy",
   cost: "Cost",
   price: "Price per unit",
-  releaseDate: "Release Date"
+  releaseDate: "Release Date",
+  summary: "Summary",
+  selectedDevices: "Selected Devices",
+  requiredTransformers: "Required Transformers",
+  totals: "Totals",
+  landRequired: "Land Required",
+  energyDensity: "Energy Density"
 };
 
 export default enUS;

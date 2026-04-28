@@ -44,6 +44,11 @@ Architecture
       state:
         selectedDevices: { [name]: number }
 
+
+      AccordianCart
+      DeviceDetails
+
+
     DeviceSelector
       Quantity selector for each battery type, modifies selected device state
       Renders device specifications (details, image) for available batteries behind accordian

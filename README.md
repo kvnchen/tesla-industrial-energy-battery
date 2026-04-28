@@ -1,5 +1,11 @@
 ## Getting Started
 
+To install dependencies:
+
+```bash
+npm install
+```
+
 To run the development server:
 
 ```bash

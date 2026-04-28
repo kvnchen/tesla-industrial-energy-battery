@@ -1,0 +1,7 @@
+.device-selector {
+  width: 48vw;
+  height: 90vh;
+  border-radius: 15px;
+  background-color: var(--foreground);
+  padding: 20px;
+}

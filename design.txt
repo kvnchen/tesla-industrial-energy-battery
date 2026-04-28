@@ -30,7 +30,7 @@ Architecture
 
   Components
 
-    DashboardContainer
+    Dashboard
       Primary container component
       Stores selected device state
       Retrieves and writes session data to/from localStorage
@@ -38,20 +38,23 @@ Architecture
       Updates device state based on user interactions from the DeviceSelector component
 
       props:
-        devices: { [name]: Device }
+        batteries: Device[]
         transformer: Device
 
       state:
         selectedDevices: { [name]: number }
 
-
     DeviceSelector
-      Renders device specifications (details, image) for available batteries
-      Quantity selector and add button for each battery type, modifies selected device state
+      Quantity selector for each battery type, modifies selected device state
+      Renders device specifications (details, image) for available batteries behind accordian
 
-    CartSummary
+      props:
+        batteries: Device[]
+        selectedDevices: { [name]: number }
+        setSelectedDevices: setState(selectedDevices)
+
+    Summary
       Displays current selected quantities of each battery type & transformers
-      Allows toggling battery amount in cart or removing from cart
       Transformer count derrived and updated based on selected battery count
       Displays aggregated dimension, cost, and energy density information
 
@@ -66,7 +69,8 @@ Data Model
     floorSqFt,
     energyMWh,
     costUSD,
-    releaseYear
+    releaseYear,
+    imgURL
 
   SelectedDevices
     [name]: number

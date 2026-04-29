@@ -9,17 +9,17 @@ import AccordianCart from '../accordian_cart/accordian_cart';
 import DeviceDetails from '../device_details/device_details';
 
 export default function DeviceSelector({ batteries, selectedDevices, setSelectedDevices }: {
-  batteries: Device[],
+  batteries: { [key: string]: Device },
   selectedDevices: SelectedDevices,
   setSelectedDevices: React.Dispatch<React.SetStateAction<SelectedDevices>>
 }) {
   // initialize with first accordian open
-  const [activeId, setActiveId] = useState<string>(`${batteries[0].name}-accordian`);
+  const [activeId, setActiveId] = useState<string>(`${Object.values(batteries)[0].name}-accordian`);
 
   return (
     <section className={styles['device-selector']}>
       <h2>{i18n('selectDevices')}</h2>
-      {batteries.map((device) => {
+      {Object.values(batteries).map((device) => {
         const id = `${device.name}-accordian`;
 
         return (

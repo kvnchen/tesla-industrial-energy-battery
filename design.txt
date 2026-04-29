@@ -16,6 +16,8 @@ Requirements
   Nonfunctional
     Sessions are saved and can be resumed, persist through cache clears
     Hosted on a public server
+
+  Stretch
     UI layout adjusts for desktop/tablet/mobile screen dimensions
     Unit tests on components
 

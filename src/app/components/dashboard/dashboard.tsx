@@ -5,13 +5,14 @@ import { useState, useEffect } from 'react';
 import { Device, SelectedDevices } from '../../utils/interfaces';
 import DeviceSelector from '../device_selector/device_selector';
 import Summary from '../summary/summary';
+import SiteLayout from '../site_layout/site_layout';
 
 export default function Dashboard({ batteries, transformer }: {
-  batteries: Device[],
+  batteries: { [key: string]: Device },
   transformer: Device
 }) {
   const temp: SelectedDevices = {};
-  for (const battery of batteries) {
+  for (const battery of Object.values(batteries)) {
     temp[battery.name] = 0;
   }
 
@@ -31,7 +32,8 @@ export default function Dashboard({ batteries, transformer }: {
   return (
     <main className={styles.main}>
       <DeviceSelector batteries={batteries} selectedDevices={selectedDevices} setSelectedDevices={setSelectedDevices} />
-      <Summary devices={batteries} transformer={transformer} selectedDevices={selectedDevices} />
+      <Summary batteries={batteries} transformer={transformer} selectedDevices={selectedDevices} />
+      <SiteLayout batteries={batteries} selectedDevices={selectedDevices} transformer={transformer} />
     </main>
   );
 }

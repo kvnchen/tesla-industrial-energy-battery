@@ -3,8 +3,8 @@ import { Device, SelectedDevices } from '../../utils/interfaces';
 import i18n from '../../utils/i18n';
 
 // total price, floor dimension, energy density
-export default function Summary({ devices, transformer, selectedDevices }: {
-  devices: Device[],
+export default function Summary({ batteries, transformer, selectedDevices }: {
+  batteries: { [key: string]: Device },
   transformer: Device,
   selectedDevices: SelectedDevices
 }) {
@@ -14,7 +14,7 @@ export default function Summary({ devices, transformer, selectedDevices }: {
   let totalSqFt = requiredTransformers * transformer.floorSqFt[0] * transformer.floorSqFt[1];
   let totalCost = requiredTransformers * transformer.costUSD;
 
-  for (const device of devices) {
+  for (const device of Object.values(batteries)) {
     if (selectedDevices[device.name] > 0) {
       totalEnergy += selectedDevices[device.name] * device.energyMWh;
       totalSqFt += selectedDevices[device.name] * device.floorSqFt[0] * device.floorSqFt[1];
@@ -29,7 +29,7 @@ export default function Summary({ devices, transformer, selectedDevices }: {
       <h2>{i18n('summary')}</h2>
       {totalBatteries > 0 && <div className={styles.itemized}>
         <h3>{i18n('selectedDevices')}</h3>
-        {devices.map((device) => {
+        {Object.values(batteries).map((device) => {
           if (selectedDevices[device.name] > 0)
             return (
               <p key={device.name} className={styles['device-line']}>

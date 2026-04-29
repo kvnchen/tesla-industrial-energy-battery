@@ -4,7 +4,7 @@
   display: flex;
 }
 
-.details > .left {
+.left {
   width: 300px;
   height: 500px;
   overflow: hidden;
@@ -30,4 +30,25 @@
 
 .right > p:last-child {
   margin-top: 20px;
+}
+
+/* shift image layout */
+@media (width < 560px) {
+  .details {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .details > .left {
+    width: 100%;
+  }
+
+  .left > img {
+    margin: 0 0 0 -100px;
+  }
+
+  .right > h2 {
+    display: none;
+  }
 }

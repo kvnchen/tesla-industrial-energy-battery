@@ -1,10 +1,18 @@
 .main {
   display: flex;
   flex-wrap: wrap;
-  width: 100vw;
+  width: 100%;
+  max-width: 1950px;
   min-height: calc(100vh - 56px);
   background-color: var(--background);
   color: var(--text-primary);
-  padding: 40px;
+  padding: 30px;
   gap: 20px;
+}
+
+@media (width < 1310px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
 }

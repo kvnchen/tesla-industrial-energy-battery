@@ -1,5 +1,5 @@
 .layout {
-  width: 590px;
+  width: 615px;
   height: fit-content;
   border-radius: 15px;
   background-color: var(--foreground);
@@ -61,4 +61,38 @@
 
 .device.lightpink {
   background-color: lightpink;
+}
+
+@media (width < 672px) {
+  .layout {
+    width: 100%;
+  }
+
+  .grid {
+    width: 100%;
+  }
+
+  .row {
+    width: 100%;
+  }
+}
+
+@media (width < 632px) {
+  .device {
+    font-size: .8rem;
+    width: 10%;
+    height: 40px;
+  }
+
+  .device.w40 {
+    width: 40%;
+  }
+
+  .device.w30 {
+    width: 30%;
+  }
+
+  .device.w10 {
+    width: 10%;
+  }
 }

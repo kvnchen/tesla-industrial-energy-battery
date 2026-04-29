@@ -1,5 +1,5 @@
 .device-selector {
-  width: 590px;
+  width: 615px;
   height: 800px;
   border-radius: 15px;
   background-color: var(--foreground);
@@ -9,4 +9,17 @@
 .device-selector > h2 {
   margin-bottom: 20px;
   border-bottom: 1px solid lightgray;
+}
+
+@media (width < 1310px) {
+  .device-selector {
+    height: fit-content;
+  }
+}
+
+
+@media (width < 672px) {
+  .device-selector {
+    width: 100%;
+  }
 }

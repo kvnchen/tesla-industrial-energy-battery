@@ -1,5 +1,5 @@
 .summary {
-  width: 590px;
+  width: 615px;
   height: 520px;
   border-radius: 15px;
   background-color: var(--foreground);
@@ -28,4 +28,25 @@
 
 .bold {
   font-weight: bold;
+}
+
+@media (width < 672px) {
+  .summary {
+    width: 100%;
+  }
+}
+
+@media (width < 440px) {
+  .summary {
+    height: 480px;
+  }
+
+  .itemized {
+    padding: 5px;
+    padding-top: 10px;
+  }
+
+  .itemized > p {
+    padding-left: 5px;
+  }
 }

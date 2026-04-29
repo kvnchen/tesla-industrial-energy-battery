@@ -1,4 +1,9 @@
-## Getting Started
+## Hosted App
+https://tesla-industrial-energy-battery.vercel.app/
+
+View the site on your phone to see the mobile styling.
+
+## Local Dev Environment Setup
 
 To install dependencies:
 
@@ -12,4 +17,4 @@ To run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:8000](http://localhost:8000) with your browser to see the result.

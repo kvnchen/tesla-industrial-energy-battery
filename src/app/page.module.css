@@ -27,3 +27,7 @@
   fill: var(--text-secondary);
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}

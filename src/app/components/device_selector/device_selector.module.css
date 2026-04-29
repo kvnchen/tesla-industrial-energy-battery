@@ -1,6 +1,6 @@
 .device-selector {
-  width: 49%;
-  height: 80%;
+  width: 590px;
+  height: 800px;
   border-radius: 15px;
   background-color: var(--foreground);
   padding: 20px;

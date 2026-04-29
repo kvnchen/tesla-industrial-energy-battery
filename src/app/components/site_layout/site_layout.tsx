@@ -1,16 +1,22 @@
 import styles from './site_layout.module.css';
 import { Device, SelectedDevices } from '../../utils/interfaces';
+import i18n from '../../utils/i18n';
 
 interface Row {
   contents: Device['name'][],
   available: number
 }
 
+const COLORS = ['white', 'lightblue', 'lightyellow', 'lightpink'];
+
 export default function SiteLayout({ batteries, selectedDevices, transformer }: {
   batteries: { [key: string]: Device },
   selectedDevices: SelectedDevices,
   transformer: Device
 }) {
+  const colorMap: { [key: string]: string } = {};
+  Object.keys(batteries).map((key: string, index) => colorMap[key] = COLORS[index]);
+
   const layout: Row[] = [
     {
       contents: [],
@@ -54,9 +60,27 @@ export default function SiteLayout({ batteries, selectedDevices, transformer }: 
   let requiredTransformers = Math.floor(totalBatteries / 2);
   placeItem(transformer, requiredTransformers);
 
-  console.log(layout);
-
   return (
-    <></>
+    <section className={styles.layout}>
+      <h2>{i18n('sampleLayout')}</h2>
+      <div className={styles.grid}>
+        {layout.map((row, index) =>
+          <div key={`layout-row-${index}`} className={styles.row}>
+            {row.contents.map((deviceName, deviceIndex) => {
+              const sizeMod = batteries[deviceName] ? styles[`w${batteries[deviceName].floorSqFt[0]}`] : '';
+              const colorMod = colorMap[deviceName] ? styles[colorMap[deviceName]] : '';
+
+              return (
+                <div
+                  key={`row-${index}-device-${deviceIndex}`}
+                  className={`${styles.device} ${sizeMod} ${colorMod}`}>
+                  {i18n(`${deviceName}Abbr`) ? i18n(`${deviceName}Abbr`) : deviceName}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

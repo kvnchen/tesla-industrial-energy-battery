@@ -14,7 +14,10 @@ const enUS: Dictionary = {
   requiredTransformers: "Required Transformers",
   totals: "Totals",
   landRequired: "Land Required",
-  energyDensity: "Energy Density"
+  energyDensity: "Energy Density",
+  sampleLayout: "Sample Layout",
+  PowerPackAbbr: "PP",
+  TransformerAbbr: "T"
 };
 
 export default enUS;

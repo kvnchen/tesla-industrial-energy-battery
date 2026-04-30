@@ -21,7 +21,15 @@ export default function Dashboard({ batteries, transformer }: {
   useEffect(() => {
     const saved = window.localStorage.getItem('tesla_selected_devices');
     if (saved !== null) {
-      setSelectedDevices(JSON.parse(saved));
+      // saved devices may be different from input devices in the future
+      const tempSelected: SelectedDevices = {};
+      const parsed = JSON.parse(saved);
+
+      for (const name of Object.keys(batteries)) {
+        if (typeof parsed[name] === 'number')
+          tempSelected[name] = parsed[name];
+      }
+      setSelectedDevices(tempSelected);
     }
   }, []);
 

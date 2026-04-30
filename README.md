@@ -18,3 +18,10 @@ npm run dev
 ```
 
 Open [http://localhost:8000](http://localhost:8000) with your browser to see the result.
+
+
+To run tests:
+
+```bash
+npm run test
+```

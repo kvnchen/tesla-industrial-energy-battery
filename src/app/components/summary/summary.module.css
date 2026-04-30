@@ -43,10 +43,16 @@
 
   .itemized {
     padding: 5px;
-    padding-top: 10px;
+    padding-top: 20px;
   }
 
   .itemized > p {
     padding-left: 5px;
+  }
+}
+
+@media (width < 380px) {
+  .summary {
+    font-size: .9rem;
   }
 }

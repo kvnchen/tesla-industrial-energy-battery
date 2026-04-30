@@ -19,6 +19,7 @@ export default function AccordianCart({ deviceName, activeId, setActiveId, quant
         id={`accordian-${deviceName}-button`}
         aria-expanded={activeId === id}
         aria-controls={`${deviceName}-details`}
+        aria-label={`Toggle ${deviceName} accordian`}
         className={styles.toggle}
         onClick={() =>
           activeId === id ? setActiveId('') : setActiveId(id)
@@ -34,6 +35,7 @@ export default function AccordianCart({ deviceName, activeId, setActiveId, quant
       </button>
       <div className={styles['button-group']}>
         <button
+          aria-label={`increment ${deviceName} quantity`}
           disabled={quantity === 0}
           onClick={() =>
             setSelectedDevices((prev) => {
@@ -44,6 +46,7 @@ export default function AccordianCart({ deviceName, activeId, setActiveId, quant
         <input
           id='device-quantity-input'
           name='device-quantity-input'
+          aria-label={`set ${deviceName} quantity`}
           type='number'
           value={quantity}
           min={0}
@@ -55,6 +58,7 @@ export default function AccordianCart({ deviceName, activeId, setActiveId, quant
           }
         />
         <button
+          aria-label={`decrement ${deviceName} quantity`}
           disabled={quantity === 99}
           onClick={() =>
             setSelectedDevices((prev) => {

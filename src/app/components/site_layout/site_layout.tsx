@@ -23,18 +23,25 @@ export default function SiteLayout({ batteries, selectedDevices, transformer }: 
       available: 100
     }
   ];
-  
+
+  const available: Set<number> = new Set([0]);
+
   // greedy algorithm
   function placeItem(device: Device, count: number) {
     while (count > 0) {
       let didPlace = false;
 
-      for (const row of layout) {
+      for (const index of available) {
+        const row = layout[index];
         if (row.available >= device.floorSqFt[0]) {
           row.available -= device.floorSqFt[0];
           row.contents.push(device.name);
           count -= 1;
           didPlace = true;
+
+          if (row.available === 0)
+            available.delete(index);
+
           break;
         }
       }
@@ -46,6 +53,7 @@ export default function SiteLayout({ batteries, selectedDevices, transformer }: 
         };
         layout.push(newRow);
         count -= 1;
+        available.add(layout.length - 1);
       }
     }
   }

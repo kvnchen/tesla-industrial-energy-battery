@@ -2,7 +2,6 @@ import styles from './device_details.module.css';
 import { Device } from '../../utils/interfaces';
 import i18n from '../../utils/i18n';
 
-// todo: dollar commas
 export default function DeviceDetails({ device }: {
   device: Device
 }) {

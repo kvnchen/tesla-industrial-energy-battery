@@ -4,7 +4,6 @@ import styles from './accordian_cart.module.css';
 import { SelectedDevices } from '../../utils/interfaces';
 import { Battery } from '../../utils/types';
 
-// todo: aria
 export default function AccordianCart({ deviceName, activeId, setActiveId, quantity, setSelectedDevices }: {
   deviceName: Battery,
   activeId: string,
@@ -17,6 +16,9 @@ export default function AccordianCart({ deviceName, activeId, setActiveId, quant
   return (
     <div id={id} className={styles.accordian}>
       <button
+        id={`accordian-${deviceName}-button`}
+        aria-expanded={activeId === id}
+        aria-controls={`${deviceName}-details`}
         className={styles.toggle}
         onClick={() =>
           activeId === id ? setActiveId('') : setActiveId(id)

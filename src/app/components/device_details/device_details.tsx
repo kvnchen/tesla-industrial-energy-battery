@@ -7,7 +7,12 @@ export default function DeviceDetails({ device }: {
   device: Device
 }) {
   return (
-    <article className={styles.details}>
+    <article
+      className={styles.details}
+      id={`${device.name}-details`}
+      role='region'
+      aria-labelledby={`accordian-${device.name}-button`}
+    >
       <section className={styles.left}>
         <img
           src={device.imgURL as string}

@@ -12,8 +12,6 @@ Requirements
     One transformer for every two industrial batteries bought is automatically added
     UI auto generates a layout showing an arrangement of selected batteries not exceeding 100ft in width
     Display images of devices
-
-  Nonfunctional
     Sessions are saved and can be resumed, persist through cache clears
     Hosted on a public server
 
@@ -23,50 +21,123 @@ Requirements
 
 
 Architecture
-  Single page application with Vite, React, Typescript
+  Single-page application with Next.js, React, Typescript
+    Next.js was chosen for a number of convenience factors:
+      it supports server-side rendering for components, improving render-time performance
+      it has easy rebranding & metadata modifying options
+      compatibility with Vercel's free hosting
+      I'm more familiar with Next.js
+
+    Vite would have been sufficient for a single-page application.
+
   Session data stored in localStorage
+    since the only information that needs to be persisted is selected devices, this simple 
+    and relatively small amount of data can be stored in localStorage
+    one drawback is that localStorage can't be read until the component mounts, meaning it will render twice
+    IndexedDB has the same drawback, and is unnecessary for the amount of data in question
+
+  Hosted on Vercel's free tier
+    simply linked a github repo and it automatically spun up a server and set up CI/CD pipelines
+
+  Unit tests with React Testing Library, Jest, and the garbage needed to get it working
+    this test setup is kind of jank... I didn't have the time to investigate a more elegant out-of-the-box
+    solution
 
 
   localStorage
     selected_devices: SelectedDevices { [name]: number }
+
+    this schema is unaware of what the input device types are to the component
+    so if the saved devices can be different to what the input devices are
+    current heuristic is to only load devices matching the input devices
+
 
   Components
 
     Dashboard
       Primary container component
       Stores selected device state
-      Retrieves and writes session data to/from localStorage
+      Retrieves and writes session data to/from localStorage via useEffect
       Passes data as props to display components
       Updates device state based on user interactions from the DeviceSelector component
 
       props:
-        batteries: Device[]
+        batteries: { [name]: Device }
         transformer: Device
 
       state:
         selectedDevices: { [name]: number }
 
+      children:
+        DeviceSelector
+        Summary
+        SiteLayout
 
-      AccordianCart
-      DeviceDetails
+      We could have created a useContext here to avoid prop drilling selectedDevices, but
+      it wasn't that many levels of passing and I was lazy.
 
 
     DeviceSelector
-      Quantity selector for each battery type, modifies selected device state
-      Renders device specifications (details, image) for available batteries behind accordian
+      Container for quantity selector for each battery type and device details
 
       props:
-        batteries: Device[]
+        batteries: { [name]: Device }
         selectedDevices: { [name]: number }
         setSelectedDevices: setState(selectedDevices)
+
+      state:
+        activeId: string
+
+      children:
+        AccordianCart
+        DeviceDetails
+
+      Only one AccordianCart can be "expanded" at once, so that id is tracked here
+
+    AccordianCart
+      combination of an accordian and an input group
+      displays expanded state and toggles activeId, changes selectedDevices for a single device
+
+      props:
+        deviceName,
+        activeId,
+        setActiveId,
+        quantity,
+        setSelectedDevices
+
+      Has aria corresponding to the id of the corresponding DeviceDetails
+
+    DeviceDetails
+      renders the device image & details information
+
+      props:
+        device
+
 
     Summary
       Displays current selected quantities of each battery type & transformers
       Transformer count derrived and updated based on selected battery count
       Displays aggregated dimension, cost, and energy density information
 
+      props:
+        batteries: { [key: string]: Device },
+        transformer: Device,
+        selectedDevices: SelectedDevices
+
+      Calculates totals as derived information
+
+
     SiteLayout
       Renders a 2D grid of selected devices + transformers
+
+      state:
+        batteries: { [key: string]: Device },
+        selectedDevices: SelectedDevices,
+        transformer: Device
+
+      Uses a greedy algorithm to place devices in the grid.
+      Only works nicely because Transformers and PowerPacks are 10x10, filling in gaps.
+      Would probably want to accept colors as a prop.
 
 
 Data Model
@@ -79,8 +150,16 @@ Data Model
     releaseYear,
     imgURL
 
+    Property names include their units, values are simply numbers.
+    Cost would realistically be queried from a different fluctuating table, included
+    in the data model here for convenience.
+
   SelectedDevices
     [name]: number
+
+  types
+    Battery = 'MegapackXL' | 'Megapack2' | 'Megapack' | 'PowerPack';
+    COLORS = ['white', 'lightblue', 'lightyellow', 'lightpink'];
 
 
 API

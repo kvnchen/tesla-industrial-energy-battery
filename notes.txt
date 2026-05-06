@@ -1,0 +1,10 @@
+Upcomming interview reviewing this assignment, potentially with live coding.
+
+Assume we will have to justify and explain our decisions.
+For preparation, would be good to review the design & implementation decisions.
+Maybe brush up on some of the technologies as well.
+
+[x] design doc pass
+[] comments in each component (read the code again)?
+[] react concepts review
+

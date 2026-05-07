@@ -1,13 +1,19 @@
+'use client';
+
 import styles from './summary.module.css';
 import { Device, SelectedDevices } from '../../utils/interfaces';
 import i18n from '../../utils/i18n';
+import { DeviceContext } from '../device_context/device_context';
+import { useContext } from 'react';
 
 // total price, floor dimension, energy density
-export default function Summary({ batteries, transformer, selectedDevices }: {
-  batteries: { [key: string]: Device },
-  transformer: Device,
+export default function Summary({ selectedDevices }: {
   selectedDevices: SelectedDevices
 }) {
+  const context = useContext(DeviceContext);
+  const batteries = context.batteries;
+  const transformer = context.transformer as Device;
+
   const totalBatteries = Object.keys(selectedDevices).reduce((prev, cur) => prev + selectedDevices[cur], 0);
   const requiredTransformers = Math.floor(totalBatteries / 2);
   let totalEnergy = requiredTransformers * transformer.energyMWh;

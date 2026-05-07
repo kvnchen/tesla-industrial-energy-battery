@@ -1,18 +1,21 @@
 'use client';
 
 import styles from './device_selector.module.css';
-import { Device, SelectedDevices } from '../../utils/interfaces';
+import {  SelectedDevices } from '../../utils/interfaces';
 import { Battery } from '../../utils/types';
 import i18n from '../../utils/i18n';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import AccordianCart from '../accordian_cart/accordian_cart';
 import DeviceDetails from '../device_details/device_details';
+import { DeviceContext } from '../device_context/device_context';
 
-export default function DeviceSelector({ batteries, selectedDevices, setSelectedDevices }: {
-  batteries: { [key: string]: Device },
+export default function DeviceSelector({ selectedDevices, setSelectedDevices }: {
   selectedDevices: SelectedDevices,
   setSelectedDevices: React.Dispatch<React.SetStateAction<SelectedDevices>>
 }) {
+  const context = useContext(DeviceContext);
+  const batteries = context.batteries;
+
   // initialize with first accordian open
   const [activeId, setActiveId] = useState<string>(`${Object.values(batteries)[0].name}-accordian`);
 

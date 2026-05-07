@@ -6,6 +6,7 @@ import { Device, SelectedDevices } from '../../utils/interfaces';
 import DeviceSelector from '../device_selector/device_selector';
 import Summary from '../summary/summary';
 import SiteLayout from '../site_layout/site_layout';
+import { DeviceContext } from '../device_context/device_context';
 
 export default function Dashboard({ batteries, transformer }: {
   batteries: { [key: string]: Device },
@@ -39,9 +40,11 @@ export default function Dashboard({ batteries, transformer }: {
 
   return (
     <main className={styles.main}>
-      <DeviceSelector batteries={batteries} selectedDevices={selectedDevices} setSelectedDevices={setSelectedDevices} />
-      <Summary batteries={batteries} transformer={transformer} selectedDevices={selectedDevices} />
-      <SiteLayout batteries={batteries} selectedDevices={selectedDevices} transformer={transformer} />
+      <DeviceContext value={{ batteries: batteries, transformer: transformer }}>
+        <DeviceSelector selectedDevices={selectedDevices} setSelectedDevices={setSelectedDevices} />
+        <Summary selectedDevices={selectedDevices} />
+        <SiteLayout selectedDevices={selectedDevices} />
+      </DeviceContext>
     </main>
   );
 }

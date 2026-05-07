@@ -1,6 +1,10 @@
+'use client';
+
 import styles from './site_layout.module.css';
 import { Device, SelectedDevices } from '../../utils/interfaces';
 import i18n from '../../utils/i18n';
+import { DeviceContext } from '../device_context/device_context';
+import { useContext } from 'react';
 
 interface Row {
   contents: Device['name'][],
@@ -9,11 +13,12 @@ interface Row {
 
 const COLORS = ['white', 'lightblue', 'lightyellow', 'lightpink'];
 
-export default function SiteLayout({ batteries, selectedDevices, transformer }: {
-  batteries: { [key: string]: Device },
-  selectedDevices: SelectedDevices,
-  transformer: Device
+export default function SiteLayout({ selectedDevices, }: {
+  selectedDevices: SelectedDevices
 }) {
+  const context = useContext(DeviceContext);
+  const batteries = context.batteries;
+  const transformer = context.transformer as Device;
   const colorMap: { [key: string]: string } = {};
   Object.keys(batteries).map((key: string, index) => colorMap[key] = COLORS[index]);
 

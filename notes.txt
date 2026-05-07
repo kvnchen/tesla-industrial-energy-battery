@@ -5,6 +5,13 @@ For preparation, would be good to review the design & implementation decisions.
 Maybe brush up on some of the technologies as well.
 
 [x] design doc pass
+[x] api req for device data
+[] context for passing device data
+   mostly for convenience, they don't change
+   all components that take selectedDevices as a prop have to rerender anyways when they change
+   outermost dashboard component rerenders when selectedDevices changes already
 [] comments in each component (read the code again)?
 [] react concepts review
 
+
+I don't know why fetch is asking for full urls, it should work when the api is in the same domain.

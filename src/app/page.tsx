@@ -27,6 +27,14 @@ const BATTERIES: { [key: string]: Device } = {
     releaseYear: 2021,
     imgURL: 'https://electrek.co/wp-content/uploads/sites/3/2021/07/Tesla-Megapack-hero.jpg'
   },
+  Megapack3: {
+    name: 'Megapack3',
+    floorSqFt: [80, 10],
+    energyMWh: 10,
+    costUSD: 200000,
+    releaseYear: 2026,
+    imgURL: 'https://electrek.co/wp-content/uploads/sites/3/2021/07/Tesla-Megapack-hero.jpg'
+  },
   Megapack: {
     name: 'Megapack',
     floorSqFt: [30, 10],

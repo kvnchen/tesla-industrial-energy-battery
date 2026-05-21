@@ -2,6 +2,31 @@ import styles from './summary.module.css';
 import { Device, SelectedDevices } from '../../utils/interfaces';
 import i18n from '../../utils/i18n';
 
+export function getTotals(batteries: { [key: string]: Device }, transformer: Device, selectedDevices: SelectedDevices) {
+  const totalBatteries = Object.keys(selectedDevices).reduce((prev, cur) => prev + selectedDevices[cur], 0);
+  const requiredTransformers = Math.floor(totalBatteries / 2);
+  let totalEnergy = requiredTransformers * transformer.energyMWh;
+  let totalSqFt = requiredTransformers * transformer.floorSqFt[0] * transformer.floorSqFt[1];
+  let totalCost = requiredTransformers * transformer.costUSD;
+
+  for (const device of Object.values(batteries)) {
+    if (selectedDevices[device.name] > 0) {
+      totalEnergy += selectedDevices[device.name] * device.energyMWh;
+      totalSqFt += selectedDevices[device.name] * device.floorSqFt[0] * device.floorSqFt[1];
+      totalCost += selectedDevices[device.name] * device.costUSD;
+    }
+  }
+
+  const energyDensity = String((totalEnergy / totalSqFt) * 1000).slice(0, 4);
+
+  return {
+    totalEnergy: totalEnergy,
+    totalSqFt: totalSqFt,
+    totalCost: totalCost,
+    energyDensity: energyDensity
+  };
+}
+
 // total price, floor dimension, energy density
 export default function Summary({ batteries, transformer, selectedDevices }: {
   batteries: { [key: string]: Device },

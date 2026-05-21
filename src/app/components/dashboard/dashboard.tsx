@@ -17,6 +17,7 @@ export default function Dashboard({ batteries, transformer }: {
   }
 
   const [selectedDevices, setSelectedDevices] = useState<SelectedDevices>(temp);
+  const [maxBudget, setMaxBudget] = useState(1000000);
 
   useEffect(() => {
     const saved = window.localStorage.getItem('tesla_selected_devices');
@@ -39,7 +40,7 @@ export default function Dashboard({ batteries, transformer }: {
 
   return (
     <main className={styles.main}>
-      <DeviceSelector batteries={batteries} selectedDevices={selectedDevices} setSelectedDevices={setSelectedDevices} />
+      <DeviceSelector maxBudget={maxBudget} setMaxBudget={setMaxBudget} batteries={batteries} selectedDevices={selectedDevices} setSelectedDevices={setSelectedDevices} transformer={transformer} />
       <Summary batteries={batteries} transformer={transformer} selectedDevices={selectedDevices} />
       <SiteLayout batteries={batteries} selectedDevices={selectedDevices} transformer={transformer} />
     </main>

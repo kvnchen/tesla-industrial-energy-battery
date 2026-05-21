@@ -34,6 +34,10 @@
   background-color: lightgray;
 }
 
+.device.w80 {
+  width: 400px;
+}
+
 .device.w40 {
   width: 200px;
 }
@@ -60,6 +64,10 @@
 
 .device.lightpink {
   background-color: lightpink;
+}
+
+.device.lightgreen {
+  background-color: lightgreen;
 }
 
 @media (width < 672px) {

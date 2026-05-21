@@ -7,7 +7,7 @@ interface Row {
   available: number
 }
 
-const COLORS = ['white', 'lightblue', 'lightyellow', 'lightpink'];
+const COLORS = ['white', 'lightblue', 'lightyellow', 'lightpink', 'lightgreen'];
 
 export default function SiteLayout({ batteries, selectedDevices, transformer }: {
   batteries: { [key: string]: Device },
